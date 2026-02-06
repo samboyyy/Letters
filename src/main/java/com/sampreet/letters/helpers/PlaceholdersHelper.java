@@ -12,7 +12,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlaceholdersHelper {
 
-    private PlaceholdersHelper() {}
+    private PlaceholdersHelper() {
+    }
 
     public static @Nullable Component setPlaceholders(
             @Nullable Component message,
