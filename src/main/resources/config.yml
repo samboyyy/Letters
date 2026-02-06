@@ -47,3 +47,7 @@ system:
     placeholder_api:
       found: "PlaceholderAPI detected. Additional placeholders will work"
       not_found: "PlaceholderAPI not detected. Additional placeholders will not work"
+
+    luckperms:
+      found: "LuckPerms detected. Group-based messages will work"
+      not_found: "LuckPerms not detected. Group-based messages will not work"

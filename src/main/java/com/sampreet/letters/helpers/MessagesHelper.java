@@ -1,6 +1,7 @@
 package com.sampreet.letters.helpers;
 
 import com.sampreet.letters.Letters;
+import com.sampreet.letters.hooks.LuckPermsHook;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -36,12 +37,12 @@ public class MessagesHelper {
     public String resolveRandomMessage(@NotNull Player player, String key) {
         String message = getRandomMessage("player_specific." + player.getName() + "." + key);
 
-//        if (message == null) {
-//            String primaryGroup = LuckPermsHook.getPrimaryGroup(player);
-//
-//            if (primaryGroup != null)
-//                message = getRandomMessage("group_based." + primaryGroup + "." + key, plugin);
-//        }
+        if (message == null) {
+            String primaryGroup = LuckPermsHook.getPrimaryGroup(player);
+
+            if (primaryGroup != null)
+                message = getRandomMessage("group_based." + primaryGroup + "." + key);
+        }
 
         if (message == null)
             message = getRandomMessage("default." + key);
