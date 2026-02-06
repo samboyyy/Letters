@@ -1,8 +1,12 @@
 package com.sampreet.letters;
 
+import com.sampreet.letters.helpers.MessagesHelper;
+import com.sampreet.letters.hooks.PlaceholderApiHook;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Letters extends JavaPlugin {
+
+    private MessagesHelper messagesHelper;
 
     @Override
     public void onEnable() {
@@ -14,6 +18,9 @@ public final class Letters extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
+        this.messagesHelper = new MessagesHelper(this);
+        PlaceholderApiHook.checkPlaceholderAPI(this);
 
         logString("system.lifecycle.enable");
     }
@@ -30,5 +37,9 @@ public final class Letters extends JavaPlugin {
 
         message = message.replace("<version>", getDescription().getVersion());
         getLogger().info(message);
+    }
+
+    public MessagesHelper getMessages() {
+        return messagesHelper;
     }
 }

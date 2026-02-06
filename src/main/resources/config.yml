@@ -41,3 +41,9 @@ system:
   # Message sent to the console before the plugin disables itself due to a config option
   status:
     disabled: "Plugin is disabled in config."
+
+  # Message sent to the console when the plugin checks for dependency plugins
+  dependencies:
+    placeholder_api:
+      found: "PlaceholderAPI detected. Additional placeholders will work"
+      not_found: "PlaceholderAPI not detected. Additional placeholders will not work"
