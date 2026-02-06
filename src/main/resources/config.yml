@@ -1,0 +1,13 @@
+# If set to false, the plugin will not register any listeners or send messages
+enabled: true
+
+# These messages are shown in the console or as command feedback
+system:
+  # Message sent to the console when the plugin is enabled or disabled
+  lifecycle:
+    enable: "Enabled Letters v<version>"
+    disable: "Disabled Letters v<version>"
+
+  # Message sent to the console before the plugin disables itself due to a config option
+  status:
+    disabled: "Plugin is disabled in config."
