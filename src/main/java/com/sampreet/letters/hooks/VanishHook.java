@@ -1,6 +1,8 @@
 package com.sampreet.letters.hooks;
 
 import com.sampreet.letters.Letters;
+import com.sampreet.letters.listeners.PlayerHideListener;
+import com.sampreet.letters.listeners.PlayerShowListener;
 import org.bukkit.Bukkit;
 
 public class VanishHook {
@@ -19,10 +21,10 @@ public class VanishHook {
             pluginName = "PremiumVanish";
         }
 
-//        if (pluginName != null) {
-//            plugin.getServer().getPluginManager().registerEvents(new PlayerShowListener(plugin), plugin);
-//            plugin.getServer().getPluginManager().registerEvents(new PlayerHideListener(plugin), plugin);
-//        }
+        if (pluginName != null) {
+            plugin.getServer().getPluginManager().registerEvents(new PlayerShowListener(plugin), plugin);
+            plugin.getServer().getPluginManager().registerEvents(new PlayerHideListener(plugin), plugin);
+        }
 
         String messagePath = (pluginName != null) ?
                 "system.dependencies.vanish.found" :

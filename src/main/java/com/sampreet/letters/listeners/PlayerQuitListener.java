@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerQuitListener implements Listener {
     private final Letters plugin;
@@ -16,7 +17,7 @@ public class PlayerQuitListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent playerQuitEvent) {
+    public void onPlayerQuit(@NotNull PlayerQuitEvent playerQuitEvent) {
         String quitMessage = plugin.getMessages().resolveRandomMessage(playerQuitEvent.getPlayer(), "quit");
 
         quitMessage = PlaceholderApiHook.usePlaceholderAPI(playerQuitEvent.getPlayer(), quitMessage);
