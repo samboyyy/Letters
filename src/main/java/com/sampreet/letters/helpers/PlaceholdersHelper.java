@@ -6,6 +6,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,6 +39,15 @@ public class PlaceholdersHelper {
                     message,
                     "<player>",
                     playerComponent(player)
+            );
+        }
+
+        if (event instanceof PlayerDeathEvent playerDeathEvent) {
+            Component deathMessage = playerDeathEvent.deathMessage();
+            message = replaceLiteral(
+                    message,
+                    "<message>",
+                    deathMessage != null ? deathMessage : Component.empty()
             );
         }
 
