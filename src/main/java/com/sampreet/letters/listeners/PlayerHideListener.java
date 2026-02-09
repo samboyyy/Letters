@@ -1,7 +1,7 @@
 package com.sampreet.letters.listeners;
 
 import com.sampreet.letters.Letters;
-import com.sampreet.letters.helpers.PlaceholdersHelper;
+import com.sampreet.letters.helpers.VanishPlaceholdersHelper;
 import com.sampreet.letters.hooks.PlaceholderApiHook;
 import de.myzelyam.api.vanish.PlayerHideEvent;
 import net.kyori.adventure.text.Component;
@@ -25,7 +25,7 @@ public class PlayerHideListener implements Listener {
 
         hideMessage = PlaceholderApiHook.usePlaceholderAPI(playerHideEvent.getPlayer(), hideMessage);
         Component hideMessageComponent = plugin.getMessages().translateColors(hideMessage);
-        hideMessageComponent = PlaceholdersHelper.setPlaceholders(hideMessageComponent, playerHideEvent, plugin);
+        hideMessageComponent = VanishPlaceholdersHelper.setPlaceholders(hideMessageComponent, playerHideEvent, plugin);
 
         playerHideEvent.setSilent(true);
 
