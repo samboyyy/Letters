@@ -10,8 +10,12 @@ public class VanishHook {
     }
 
     public static void checkVanishPlugin(Letters plugin) {
-        boolean superVanishFound = Bukkit.getPluginManager().getPlugin("SuperVanish") != null;
-        boolean premiumVanishFound = Bukkit.getPluginManager().getPlugin("PremiumVanish") != null;
+
+        boolean superVanishFound =
+                Bukkit.getPluginManager().getPlugin("SuperVanish") != null;
+
+        boolean premiumVanishFound =
+                Bukkit.getPluginManager().getPlugin("PremiumVanish") != null;
 
         String pluginName = null;
 
@@ -22,22 +26,28 @@ public class VanishHook {
         }
 
         if (pluginName != null) {
-            plugin.getServer().getPluginManager().registerEvents(new PlayerShowListener(plugin), plugin);
-            plugin.getServer().getPluginManager().registerEvents(new PlayerHideListener(plugin), plugin);
+            plugin.getServer().getPluginManager()
+                    .registerEvents(new PlayerShowListener(plugin), plugin);
+
+            plugin.getServer().getPluginManager()
+                    .registerEvents(new PlayerHideListener(plugin), plugin);
         }
 
-        String messagePath = (pluginName != null) ?
-                "system.dependencies.vanish.found" :
-                "system.dependencies.vanish.not_found";
+        String messagePath =
+                (pluginName != null)
+                        ? "messages.dependencies.vanish.found"
+                        : "messages.dependencies.vanish.not_found";
 
         String message = plugin.getConfig().getString(messagePath);
 
-        if (message == null || message.trim().isEmpty())
+        if (message == null || message.trim().isEmpty()) {
             return;
+        }
 
-        if (pluginName != null)
+        if (pluginName != null) {
             plugin.getLogger().info(message.replace("<plugin>", pluginName));
-        else
+        } else {
             plugin.getLogger().warning(message);
+        }
     }
 }

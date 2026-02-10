@@ -7,34 +7,43 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class PlaceholderApiHook {
+
     private PlaceholderApiHook() {
     }
 
     public static String usePlaceholderAPI(Player player, String message) {
-        if (message == null || message.isBlank())
-            return null;
 
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null)
+        if (message == null || message.isBlank()) {
+            return null;
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             return message;
+        }
 
         return PlaceholderAPI.setPlaceholders(player, message);
     }
 
     public static void checkPlaceholderAPI(@NotNull Letters plugin) {
-        boolean PlaceholderApiFound = Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null;
 
-        String messagePath = PlaceholderApiFound ?
-                "system.dependencies.placeholder_api.found" :
-                "system.dependencies.placeholder_api.not_found";
+        boolean placeholderApiFound =
+                Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null;
+
+        String messagePath =
+                placeholderApiFound
+                        ? "messages.dependencies.placeholder_api.found"
+                        : "messages.dependencies.placeholder_api.not_found";
 
         String message = plugin.getConfig().getString(messagePath);
 
-        if (message == null || message.isBlank())
+        if (message == null || message.isBlank()) {
             return;
+        }
 
-        if (PlaceholderApiFound)
+        if (placeholderApiFound) {
             plugin.getLogger().info(message);
-        else
+        } else {
             plugin.getLogger().warning(message);
+        }
     }
 }

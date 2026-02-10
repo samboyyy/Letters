@@ -17,19 +17,33 @@ public class PlayerJoinListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(@NotNull PlayerJoinEvent playerJoinEvent) {
+    public void onPlayerJoin(@NotNull PlayerJoinEvent event) {
+
         String joinMessage = null;
 
-        if (!playerJoinEvent.getPlayer().hasPlayedBefore())
-            joinMessage = plugin.getMessages().resolveRandomMessage(playerJoinEvent.getPlayer(), "first-join");
+        if (!event.getPlayer().hasPlayedBefore()) {
+            joinMessage =
+                    plugin.getMessages().resolveRandomMessage(event.getPlayer(), "first-join");
+        }
 
-        if (joinMessage == null)
-            joinMessage = plugin.getMessages().resolveRandomMessage(playerJoinEvent.getPlayer(), "join");
+        if (joinMessage == null) {
+            joinMessage =
+                    plugin.getMessages().resolveRandomMessage(event.getPlayer(), "join");
+        }
 
-        joinMessage = PlaceholderApiHook.usePlaceholderAPI(playerJoinEvent.getPlayer(), joinMessage);
-        Component joinMessageComponent = plugin.getMessages().translateColors(joinMessage);
-        joinMessageComponent = PlaceholdersHelper.setPlaceholders(joinMessageComponent, playerJoinEvent, plugin);
+        joinMessage =
+                PlaceholderApiHook.usePlaceholderAPI(event.getPlayer(), joinMessage);
 
-        playerJoinEvent.joinMessage(joinMessageComponent);
+        Component joinMessageComponent =
+                plugin.getMessages().translateColors(joinMessage);
+
+        joinMessageComponent =
+                PlaceholdersHelper.setPlaceholders(
+                        joinMessageComponent,
+                        event,
+                        plugin
+                );
+
+        event.joinMessage(joinMessageComponent);
     }
 }

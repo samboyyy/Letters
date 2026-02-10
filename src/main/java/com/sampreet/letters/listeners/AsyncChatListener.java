@@ -17,18 +17,30 @@ public class AsyncChatListener implements Listener {
     }
 
     @EventHandler
-    public void onAsyncChat(@NotNull AsyncChatEvent asyncChatEvent) {
-        String chatMessage = plugin.getMessages().resolveRandomMessage(asyncChatEvent.getPlayer(), "chat");
+    public void onAsyncChat(@NotNull AsyncChatEvent event) {
 
-        chatMessage = PlaceholderApiHook.usePlaceholderAPI(asyncChatEvent.getPlayer(), chatMessage);
-        Component chatMessageComponent = plugin.getMessages().translateColors(chatMessage);
-        Component finalChatMessageComponent = PlaceholdersHelper.setPlaceholders(chatMessageComponent, asyncChatEvent, plugin);
+        String chatMessage =
+                plugin.getMessages().resolveRandomMessage(event.getPlayer(), "chat");
+
+        chatMessage =
+                PlaceholderApiHook.usePlaceholderAPI(event.getPlayer(), chatMessage);
+
+        Component chatMessageComponent =
+                plugin.getMessages().translateColors(chatMessage);
+
+        Component finalChatMessageComponent =
+                PlaceholdersHelper.setPlaceholders(
+                        chatMessageComponent,
+                        event,
+                        plugin
+                );
 
         if (finalChatMessageComponent == null) {
-            asyncChatEvent.setCancelled(true);
+            event.setCancelled(true);
             return;
         }
 
-        asyncChatEvent.renderer((source, sourceDisplayName, message, viewer) -> finalChatMessageComponent);
+        event.renderer((source, sourceDisplayName, message, viewer)
+                -> finalChatMessageComponent);
     }
 }

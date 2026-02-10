@@ -21,6 +21,7 @@ public class PlaceholdersHelper {
             @Nullable Event event,
             @Nullable Letters plugin
     ) {
+
         if (message == null || message.equals(Component.empty())) {
             return null;
         }
@@ -34,6 +35,7 @@ public class PlaceholdersHelper {
         }
 
         Player player = extractPlayer(event);
+
         if (player != null) {
             message = replaceLiteral(
                     message,
@@ -43,7 +45,9 @@ public class PlaceholdersHelper {
         }
 
         if (event instanceof PlayerDeathEvent playerDeathEvent) {
+
             Component deathMessage = playerDeathEvent.deathMessage();
+
             message = replaceLiteral(
                     message,
                     "<message>",
@@ -72,13 +76,16 @@ public class PlaceholdersHelper {
     }
 
     private static @Nullable Player extractPlayer(@Nullable Event event) {
+
         if (event instanceof PlayerJoinEvent joinEvent) {
             return joinEvent.getPlayer();
         }
+
         return null;
     }
 
     public static @NotNull Component playerComponent(@NotNull Player player) {
+
         Component hover = Component.text(player.getName())
                 .appendNewline()
                 .append(Component.text("Type: Player"))

@@ -17,13 +17,24 @@ public class PlayerDeathListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerDeath(@NotNull PlayerDeathEvent playerDeathEvent) {
-        String deathMessage = plugin.getMessages().resolveRandomMessage(playerDeathEvent.getPlayer(), "death");
+    public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
 
-        deathMessage = PlaceholderApiHook.usePlaceholderAPI(playerDeathEvent.getPlayer(), deathMessage);
-        Component deathMessageComponent = plugin.getMessages().translateColors(deathMessage);
-        deathMessageComponent = PlaceholdersHelper.setPlaceholders(deathMessageComponent, playerDeathEvent, plugin);
+        String deathMessage =
+                plugin.getMessages().resolveRandomMessage(event.getPlayer(), "death");
 
-        playerDeathEvent.deathMessage(deathMessageComponent);
+        deathMessage =
+                PlaceholderApiHook.usePlaceholderAPI(event.getPlayer(), deathMessage);
+
+        Component deathMessageComponent =
+                plugin.getMessages().translateColors(deathMessage);
+
+        deathMessageComponent =
+                PlaceholdersHelper.setPlaceholders(
+                        deathMessageComponent,
+                        event,
+                        plugin
+                );
+
+        event.deathMessage(deathMessageComponent);
     }
 }

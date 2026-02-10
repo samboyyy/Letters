@@ -18,18 +18,32 @@ public class PlayerShowListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerShow(@NotNull PlayerShowEvent playerShowEvent) {
-        if (playerShowEvent.isSilent()) return;
+    public void onPlayerShow(@NotNull PlayerShowEvent event) {
 
-        String showMessage = plugin.getMessages().resolveRandomMessage(playerShowEvent.getPlayer(), "show");
+        if (event.isSilent()) {
+            return;
+        }
 
-        showMessage = PlaceholderApiHook.usePlaceholderAPI(playerShowEvent.getPlayer(), showMessage);
-        Component showMessageComponent = plugin.getMessages().translateColors(showMessage);
-        showMessageComponent = VanishPlaceholdersHelper.setPlaceholders(showMessageComponent, playerShowEvent, plugin);
+        String showMessage =
+                plugin.getMessages().resolveRandomMessage(event.getPlayer(), "join");
 
-        playerShowEvent.setSilent(true);
+        showMessage =
+                PlaceholderApiHook.usePlaceholderAPI(event.getPlayer(), showMessage);
 
-        if (showMessageComponent != null)
+        Component showMessageComponent =
+                plugin.getMessages().translateColors(showMessage);
+
+        showMessageComponent =
+                VanishPlaceholdersHelper.setPlaceholders(
+                        showMessageComponent,
+                        event,
+                        plugin
+                );
+
+        event.setSilent(true);
+
+        if (showMessageComponent != null) {
             Bukkit.broadcast(showMessageComponent);
+        }
     }
 }

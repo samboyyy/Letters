@@ -17,13 +17,24 @@ public class PlayerQuitListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerQuit(@NotNull PlayerQuitEvent playerQuitEvent) {
-        String quitMessage = plugin.getMessages().resolveRandomMessage(playerQuitEvent.getPlayer(), "quit");
+    public void onPlayerQuit(@NotNull PlayerQuitEvent event) {
 
-        quitMessage = PlaceholderApiHook.usePlaceholderAPI(playerQuitEvent.getPlayer(), quitMessage);
-        Component quitMessageComponent = plugin.getMessages().translateColors(quitMessage);
-        quitMessageComponent = PlaceholdersHelper.setPlaceholders(quitMessageComponent, playerQuitEvent, plugin);
+        String quitMessage =
+                plugin.getMessages().resolveRandomMessage(event.getPlayer(), "quit");
 
-        playerQuitEvent.quitMessage(quitMessageComponent);
+        quitMessage =
+                PlaceholderApiHook.usePlaceholderAPI(event.getPlayer(), quitMessage);
+
+        Component quitMessageComponent =
+                plugin.getMessages().translateColors(quitMessage);
+
+        quitMessageComponent =
+                PlaceholdersHelper.setPlaceholders(
+                        quitMessageComponent,
+                        event,
+                        plugin
+                );
+
+        event.quitMessage(quitMessageComponent);
     }
 }

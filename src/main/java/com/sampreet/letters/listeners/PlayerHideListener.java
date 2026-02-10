@@ -18,18 +18,32 @@ public class PlayerHideListener implements Listener {
     }
 
     @EventHandler
-    public void noPlayerHide(@NotNull PlayerHideEvent playerHideEvent) {
-        if (playerHideEvent.isSilent()) return;
+    public void onPlayerHide(@NotNull PlayerHideEvent event) {
 
-        String hideMessage = plugin.getMessages().resolveRandomMessage(playerHideEvent.getPlayer(), "hide");
+        if (event.isSilent()) {
+            return;
+        }
 
-        hideMessage = PlaceholderApiHook.usePlaceholderAPI(playerHideEvent.getPlayer(), hideMessage);
-        Component hideMessageComponent = plugin.getMessages().translateColors(hideMessage);
-        hideMessageComponent = VanishPlaceholdersHelper.setPlaceholders(hideMessageComponent, playerHideEvent, plugin);
+        String hideMessage =
+                plugin.getMessages().resolveRandomMessage(event.getPlayer(), "quit");
 
-        playerHideEvent.setSilent(true);
+        hideMessage =
+                PlaceholderApiHook.usePlaceholderAPI(event.getPlayer(), hideMessage);
 
-        if (hideMessageComponent != null)
+        Component hideMessageComponent =
+                plugin.getMessages().translateColors(hideMessage);
+
+        hideMessageComponent =
+                VanishPlaceholdersHelper.setPlaceholders(
+                        hideMessageComponent,
+                        event,
+                        plugin
+                );
+
+        event.setSilent(true);
+
+        if (hideMessageComponent != null) {
             Bukkit.broadcast(hideMessageComponent);
+        }
     }
 }

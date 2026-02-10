@@ -17,6 +17,7 @@ public class LuckPermsHook {
     }
 
     public static void checkLuckPerms(Letters plugin) {
+
         LP_INSTALLED =
                 Bukkit.getPluginManager().getPlugin("LuckPerms") != null;
 
@@ -24,26 +25,34 @@ public class LuckPermsHook {
             LP = LuckPermsProvider.get().getUserManager();
         }
 
-        String messagePath = LP_INSTALLED ?
-                "system.dependencies.luckperms.found" :
-                "system.dependencies.luckperms.not_found";
+        String messagePath =
+                LP_INSTALLED
+                        ? "messages.dependencies.luckperms.found"
+                        : "messages.dependencies.luckperms.not_found";
 
         String message = plugin.getConfig().getString(messagePath);
 
-        if (message == null || message.isBlank())
+        if (message == null || message.isBlank()) {
             return;
+        }
 
-        if (LP_INSTALLED)
+        if (LP_INSTALLED) {
             plugin.getLogger().info(message);
-        else
+        } else {
             plugin.getLogger().warning(message);
+        }
     }
 
     public static @Nullable String getPrimaryGroup(Player player) {
-        if (!LP_INSTALLED || LP == null)
+
+        if (!LP_INSTALLED || LP == null) {
             return null;
+        }
 
         User user = LP.getUser(player.getUniqueId());
-        return user == null ? null : user.getPrimaryGroup().toLowerCase();
+
+        return user == null
+                ? null
+                : user.getPrimaryGroup().toLowerCase();
     }
 }

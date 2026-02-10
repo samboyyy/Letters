@@ -13,11 +13,13 @@ public class VanishPlaceholdersHelper {
     }
 
     public static Component setPlaceholders(Component message, Event event, Letters plugin) {
+
         if (message == null || message.equals(Component.empty())) {
             return null;
         }
 
         Player player = extractPlayer(event);
+
         if (player != null) {
             message = PlaceholdersHelper.replaceLiteral(
                     message,
@@ -30,12 +32,15 @@ public class VanishPlaceholdersHelper {
     }
 
     private static Player extractPlayer(Event event) {
-        if (event instanceof PlayerShowEvent join) {
-            return join.getPlayer();
+
+        if (event instanceof PlayerShowEvent showEvent) {
+            return showEvent.getPlayer();
         }
-        if (event instanceof PlayerHideEvent quit) {
-            return quit.getPlayer();
+
+        if (event instanceof PlayerHideEvent hideEvent) {
+            return hideEvent.getPlayer();
         }
+
         return null;
     }
 }
