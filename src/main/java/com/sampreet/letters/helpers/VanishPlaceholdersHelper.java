@@ -12,20 +12,21 @@ public class VanishPlaceholdersHelper {
     private VanishPlaceholdersHelper() {
     }
 
-    public static Component setPlaceholders(Component messageComponent, Event event, Letters plugin) {
-        if (messageComponent == null)
+    public static Component setPlaceholders(Component message, Event event, Letters plugin) {
+        if (message == null || message.equals(Component.empty())) {
             return null;
+        }
 
         Player player = extractPlayer(event);
         if (player != null) {
-            messageComponent = PlaceholdersHelper.replaceLiteral(
-                    messageComponent,
+            message = PlaceholdersHelper.replaceLiteral(
+                    message,
                     "<player>",
                     PlaceholdersHelper.playerComponent(player)
             );
         }
 
-        return PlaceholdersHelper.setPlaceholders(messageComponent, plugin);
+        return PlaceholdersHelper.setPlaceholders(message, plugin);
     }
 
     private static Player extractPlayer(Event event) {

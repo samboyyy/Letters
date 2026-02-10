@@ -21,7 +21,7 @@ public class PlaceholdersHelper {
             @Nullable Event event,
             @Nullable Letters plugin
     ) {
-        if (message == null) {
+        if (message == null || message.equals(Component.empty())) {
             return null;
         }
 
