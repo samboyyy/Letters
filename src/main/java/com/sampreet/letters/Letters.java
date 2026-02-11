@@ -1,11 +1,14 @@
 package com.sampreet.letters;
 
+import com.sampreet.letters.commands.LettersCommand;
 import com.sampreet.letters.helpers.MessagesHelper;
 import com.sampreet.letters.hooks.LuckPermsHook;
 import com.sampreet.letters.hooks.PlaceholderApiHook;
 import com.sampreet.letters.hooks.VanishHook;
 import com.sampreet.letters.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 public final class Letters extends JavaPlugin {
 
@@ -27,6 +30,8 @@ public final class Letters extends JavaPlugin {
         PlaceholderApiHook.checkPlaceholderAPI(this);
         LuckPermsHook.checkLuckPerms(this);
         VanishHook.checkVanishPlugin(this);
+
+        Objects.requireNonNull(getCommand("letters")).setExecutor(new LettersCommand(this));
 
         getServer().getPluginManager()
                 .registerEvents(new PlayerJoinListener(this), this);

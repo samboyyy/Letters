@@ -74,3 +74,13 @@ messages:
     vanish:
       found: "<plugin> detected. Vanish-related features will work"
       not_found: "SuperVanish or PremiumVanish not detected. Vanish-related features will not work"
+
+  # Messages sent when a command is run
+  commands:
+    reload: "<green>Reloaded Letters v<version>"
+
+  # Messages sent when an error occurs
+  errors:
+    no_command: "<red>You must specify a subcommand."
+    no_permission: "<red>You do not have permission to do that."
+    invalid_command: "<red>Unknown command."

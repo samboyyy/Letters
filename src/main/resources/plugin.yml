@@ -11,3 +11,11 @@ softdepend:
   - LuckPerms
   - SuperVanish
   - PremiumVanish
+commands:
+  letters:
+    description: Command to reload the plugin configuration
+    usage: /<command> <subcommand>
+permissions:
+  letters.reload:
+    description: Allows reloading of the plugin configuration
+    default: op
