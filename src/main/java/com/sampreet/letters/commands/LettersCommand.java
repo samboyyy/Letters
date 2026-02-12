@@ -7,10 +7,14 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class LettersCommand implements CommandExecutor {
+import java.util.Collections;
+import java.util.List;
+
+public class LettersCommand implements CommandExecutor, TabCompleter {
     private final Letters plugin;
 
     public LettersCommand(Letters plugin) {
@@ -42,6 +46,26 @@ public class LettersCommand implements CommandExecutor {
 
         sendMessage(commandSender, "messages.errors.invalid_command");
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(
+            @NotNull CommandSender commandSender,
+            @NotNull Command command,
+            @NotNull String s,
+            @NotNull String @NotNull [] strings
+    ) {
+
+        if (strings.length == 1) {
+
+            if (!commandSender.hasPermission("letters.reload"))
+                return Collections.emptyList();
+
+            if ("reload".startsWith(strings[0].toLowerCase()))
+                return Collections.singletonList("reload");
+        }
+
+        return Collections.emptyList();
     }
 
     private void sendMessage(CommandSender sender, String path) {

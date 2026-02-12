@@ -32,7 +32,10 @@ public final class Letters extends JavaPlugin {
         LuckPermsHook.checkLuckPerms(this);
         VanishHook.checkVanishPlugin(this);
 
-        Objects.requireNonNull(getCommand("letters")).setExecutor(new LettersCommand(this));
+        LettersCommand lettersCommand = new LettersCommand(this);
+        Objects.requireNonNull(getCommand("letters")).setExecutor(lettersCommand);
+        Objects.requireNonNull(getCommand("letters")).setTabCompleter(lettersCommand);
+
         Objects.requireNonNull(getCommand("tell")).setExecutor(new WhisperCommand(this));
 
         getServer().getPluginManager()
