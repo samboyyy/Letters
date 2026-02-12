@@ -36,17 +36,14 @@ To make sure you can customize messages however you like, the plugin supports
 ## 🏷️ Placeholders
 
 The plugin includes basic placeholders for every message type.
-These are listed in the default config file.
-For more placeholders,
-you can install [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) and any expansions you need.
+These are listed in the default config file with examples of how they work.
+For more placeholders, you can install [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) and any expansion packs you need.
 
 ## 🎨 Formatting
 
-You can format messages using [classic Minecraft codes](https://minecraft.wiki/w/Formatting_codes) like `&a` for green
-text
-or `&l` for bold text. You can also use [MiniMessage](https://docs.papermc.io/adventure/minimessage/format/) for cleaner
-formatting.
-For example `<green>` makes text green and `<bold>` makes text bold.
+You can format messages using [classic Minecraft codes](https://minecraft.wiki/w/Formatting_codes) like `&a` for green text or `&l` for bold text.  
+You can also use PaperMC's [MiniMessage](https://docs.papermc.io/adventure/minimessage/format/) format for cleaner formatting,
+such as `<green>` for green text or `<bold>` for bold.
 
 ## ⚙️ Configuration
 
