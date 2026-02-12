@@ -60,34 +60,35 @@ The default config includes examples and all built in placeholders,
 making it easy to get started.
 
 ```yml
-default:
-  join:
-    - "[...]"
-  quit:
-    - "[...]"
-
-  # Default messages apply to all players unless they are overridden.
-  # You can find examples for all supported events in the default config file.
-
-group_based:
-  admin:
+messages:
+  default:
     join:
       - "[...]"
     quit:
       - "[...]"
 
-  # Add more groups using the same format.
-  # Group names must match LuckPerms group names exactly.
+    # Default messages apply to all players unless they are overridden.
+    # You can find examples for all supported events in the default config file.
 
-player_specific:
-  Notch:
-    join:
-      - "[...]"
-    quit:
-      - "[...]"
+  group_based:
+    admin:
+      join:
+        - "[...]"
+      quit:
+        - "[...]"
 
-  # Add more players using the same format.
-  # Player names must match usernames exactly.
+    # Add more groups using the same format.
+    # Group names must match LuckPerms group names exactly.
+
+  player_specific:
+    Notch:
+      join:
+        - "[...]"
+      quit:
+        - "[...]"
+
+    # Add more players using the same format.
+    # Player names must match usernames exactly.
 ```
 
 ## 📦 Download
