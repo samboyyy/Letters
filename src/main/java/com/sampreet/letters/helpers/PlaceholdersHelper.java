@@ -8,6 +8,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.advancement.Advancement;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -20,6 +21,44 @@ import org.jetbrains.annotations.Nullable;
 public class PlaceholdersHelper {
 
     private PlaceholdersHelper() {
+    }
+
+    public static Component setPlaceholders(
+            Component messageComponent,
+            CommandSender sender,
+            Player recipient,
+            String whisperMessage,
+            Letters plugin
+    ) {
+        if (messageComponent == null) {
+            return null;
+        }
+
+        if (sender instanceof Player player) {
+            messageComponent = replaceLiteral(
+                    messageComponent,
+                    "<sender>",
+                    playerComponent(player)
+            );
+        }
+
+        if (recipient != null) {
+            messageComponent = replaceLiteral(
+                    messageComponent,
+                    "<recipient>",
+                    playerComponent(recipient)
+            );
+        }
+
+        if (whisperMessage != null) {
+            messageComponent = replaceLiteral(
+                    messageComponent,
+                    "<message>",
+                    Component.text(whisperMessage)
+            );
+        }
+
+        return setPlaceholders(messageComponent, null, plugin);
     }
 
     public static @Nullable Component setPlaceholders(
