@@ -7,9 +7,8 @@ import com.sampreet.letters.hooks.LuckPermsHook;
 import com.sampreet.letters.hooks.PlaceholderApiHook;
 import com.sampreet.letters.hooks.VanishHook;
 import com.sampreet.letters.listeners.*;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Objects;
 
 public final class Letters extends JavaPlugin {
 
@@ -33,10 +32,22 @@ public final class Letters extends JavaPlugin {
         VanishHook.checkVanishPlugin(this);
 
         LettersCommand lettersCommand = new LettersCommand(this);
-        Objects.requireNonNull(getCommand("letters")).setExecutor(lettersCommand);
-        Objects.requireNonNull(getCommand("letters")).setTabCompleter(lettersCommand);
+        PluginCommand lettersPluginCommand = getCommand("letters");
 
-        Objects.requireNonNull(getCommand("tell")).setExecutor(new WhisperCommand(this));
+        if (lettersPluginCommand == null) {
+            throw new IllegalStateException("Command 'letters' not defined in plugin.yml");
+        }
+
+        lettersPluginCommand.setExecutor(lettersCommand);
+        lettersPluginCommand.setTabCompleter(lettersCommand);
+
+        PluginCommand whisperPluginCommand = getCommand("tell");
+
+        if (whisperPluginCommand == null) {
+            throw new IllegalStateException("Command 'tell' not defined in plugin.yml");
+        }
+
+        whisperPluginCommand.setExecutor(new WhisperCommand(this));
 
         getServer().getPluginManager()
                 .registerEvents(new PlayerJoinListener(this), this);
