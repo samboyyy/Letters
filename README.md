@@ -26,13 +26,6 @@ for
 - Specific [LuckPerms](https://luckperms.net/) groups
 - Individual players by username
 
-To make sure you can customize messages however you like, the plugin supports
-
-- Classic Minecraft [`&` color and formatting codes](https://minecraft.wiki/w/Formatting_codes)
-- PaperMC [MiniMessage formatting](https://docs.papermc.io/adventure/minimessage/format/)
-- Built in placeholders for each event
-- [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) for extra placeholders from other plugins
-
 ## 🏷️ Placeholders
 
 The plugin includes basic placeholders for every message type.
